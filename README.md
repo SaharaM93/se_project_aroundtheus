@@ -1,21 +1,17 @@
-# Project 3: Around The U.S.
+# Around The U.S., an Interactive Webpage
 
-### Overview  
+The Around the U.S. Interactive Webpage is the third project in the Software Engineering program at TripleTen. It was created using HTML and CSS, based on a Figma design. The webpage was made for users to create a profile in which they can share photos, edit their profile, add and remove photos, and like the photos of other users. The project was conducted to demonstrate the ability to make a responsive webpage, optimizing the user's experience on the most popular screen sizes.
 
-* Intro  
-* Figma  
-* Images  
-  
-**Intro**
-  
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
-  
-**Figma**  
-  
-* [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)  
-  
-**Images**  
-  
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-  
-Good luck and have fun!
+## Project Features
+
+- HTML5
+- Flexbox
+- Grid Layout
+
+**Project Link**
+
+[Around the U.S.](https://saharam93.github.io/se_project_aroundtheus/)
+
+**Project Images**
+![Mainpage View](./images/screenshots/MAIN.png)
+![Mobile View](./images/screenshots/MOBILE.png)

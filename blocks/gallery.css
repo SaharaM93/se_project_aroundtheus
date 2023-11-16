@@ -13,7 +13,7 @@
   list-style-type: none;
 }
 
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 620px) {
   .gallery {
     padding: 36px 0 48px;
   }
