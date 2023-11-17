@@ -21,20 +21,14 @@
   position: relative;
 }
 
-@media screen and (min-width: 621px) and (max-width: 770px) {
+@media screen and (max-width: 620px) {
   .page__section {
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-    position: relative;
+    min-width: 282px;
   }
 }
 
-@media screen and (max-width: 620px) {
-  .page__section {
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-    position: relative;
+@media screen and (max-width: 580px) {
+  .page__content {
+    padding: 0;
   }
 }
