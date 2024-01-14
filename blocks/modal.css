@@ -1,0 +1,140 @@
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+.modal_opened {
+  display: flex;
+}
+
+.modal__container {
+  background-color: #fff;
+  margin: auto;
+  padding: 34px 36px 36px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.modal__close-button {
+  background: transparent url("../images/Close.svg") no-repeat;
+  background-size: contain;
+  border: none;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: -45px;
+  right: -45px;
+  transition: opacity 0.2s linear;
+}
+
+.modal__close-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.modal__title {
+  color: #000;
+  margin: 0 0 54px;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 900;
+  height: 23px;
+}
+
+.modal__form {
+  width: 358px;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.modal__profile-title {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 0 0 28px;
+  padding: 0 0 13px;
+  width: 358px;
+  height: 14px;
+}
+
+.modal__profile-title::placeholder {
+  color: #000;
+}
+
+.modal__profile-description {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 0 0 48px;
+  padding: 0 0 13px;
+  width: 358px;
+  height: 14px;
+}
+
+.modal__profile-description::placeholder {
+  color: #000;
+}
+
+.modal__save-button {
+  width: 358px;
+  height: 50px;
+  border: none;
+  padding: 0;
+  border-radius: 2px;
+  background-color: #000;
+  color: #fff;
+  font-size: 18px;
+  transition: opacity 0.2s linear;
+}
+
+.modal__save-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 637px) {
+  .modal__container {
+    padding: 25px 22px;
+  }
+
+  .modal__close-button {
+    width: 26px;
+    height: 26px;
+    top: -45px;
+    right: 10px;
+  }
+
+  .modal__title {
+    color: #000;
+    margin: 0 0 75px;
+    font-size: 18px;
+    line-height: 1.1;
+    height: 22px;
+  }
+
+  .modal__form {
+    width: 238px;
+  }
+
+  .modal__profile-title {
+    margin: 0 0 30px;
+    width: 238px;
+  }
+
+  .modal__profile-description {
+    margin: 0 0 45px;
+    width: 238px;
+  }
+
+  .modal__save-button {
+    width: 238px;
+    height: 46px;
+    padding: 0;
+    font-size: 14px;
+  }
+}
