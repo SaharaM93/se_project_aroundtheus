@@ -54,7 +54,7 @@
   line-height: 1.2;
 }
 
-.modal__profile-title {
+.modal__input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin: 0 0 28px;
@@ -63,20 +63,7 @@
   height: 14px;
 }
 
-.modal__profile-title::placeholder {
-  color: #000;
-}
-
-.modal__profile-description {
-  border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin: 0 0 48px;
-  padding: 0 0 13px;
-  width: 358px;
-  height: 14px;
-}
-
-.modal__profile-description::placeholder {
+.modal__input::placeholder {
   color: #000;
 }
 
@@ -84,6 +71,7 @@
   width: 358px;
   height: 50px;
   border: none;
+  margin: 20px 0 0;
   padding: 0;
   border-radius: 2px;
   background-color: #000;
@@ -121,19 +109,15 @@
     width: 238px;
   }
 
-  .modal__profile-title {
+  .modal__input {
     margin: 0 0 30px;
-    width: 238px;
-  }
-
-  .modal__profile-description {
-    margin: 0 0 45px;
     width: 238px;
   }
 
   .modal__save-button {
     width: 238px;
     height: 46px;
+    margin: 15px 0 0;
     padding: 0;
     font-size: 14px;
   }

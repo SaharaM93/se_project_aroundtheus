@@ -26,19 +26,19 @@ const initialCards = [
 ];
 
 const profileEditButton = document.querySelector(".profile__edit-button-js");
-const profileEditModal = document.querySelector(".modal-js");
+const profileEditModal = document.querySelector(".modal-edit-js");
 const profileEditCloseButton = profileEditModal.querySelector(
   ".modal__close-button-js"
 );
 const profileTitle = document.querySelector(".profile__title-js");
 const profileTitleInput = profileEditModal.querySelector(
-  ".modal__profile-title-js"
-);
+  ".modal__input_type_profile-title-js"
+); //class change ".modal__input_type_profile-title-js"
 const profileDescription = document.querySelector(".profile__description-js");
 const profileDescriptionInput = profileEditModal.querySelector(
-  ".modal__profile-description-js"
-);
-const profileEditForm = profileEditModal.querySelector(".modal__form-js");
+  ".modal__input_type_profile-description-js"
+); //class change ".modal__input_type_profile-description-js"
+const profileEditForm = document.forms["profile-edit-form"];
 const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
