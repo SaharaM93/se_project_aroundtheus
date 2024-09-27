@@ -14,10 +14,10 @@ The Around the U.S. Interactive Webpage is the third project in the Software Eng
 
 **Project Images**
 
-![Mainpage View](./images/screenshots/Main.png)
+![Mainpage View](./images/screenshots/main-layout.png)
 
 ![Mainpage Photo Preview](./images/screenshots/Main-photo-preview.png)
 
-![Mobile View](./images/screenshots/Mobile.png)
+![Mobile View](./images/screenshots/mobile-view.png)
 
-![Mobile Photo Preview](./images/screenshots/Mobile-photo-preview.png)
+![Mobile Photo Preview](./images/screenshots/Mobile.png)
