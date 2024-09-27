@@ -13,7 +13,11 @@ The Around the U.S. Interactive Webpage is the third project in the Software Eng
 [Around the U.S.](https://saharam93.github.io/se_project_aroundtheus/)
 
 **Project Images**
-![Mainpage View](./images/screenshots/Main.png)  
-![Mainpage Photo Preview](./images/screenshots/Main-photo-preview.png)  
-![Mobile View](./images/screenshots/Mobile.png)  
+
+![Mainpage View](./images/screenshots/Main.png)
+
+![Mainpage Photo Preview](./images/screenshots/Main-photo-preview.png)
+
+![Mobile View](./images/screenshots/Mobile.png)
+
 ![Mobile Photo Preview](./images/screenshots/Mobile-photo-preview.png)
