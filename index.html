@@ -68,8 +68,6 @@
         ></button>
         <h2 class="modal__title">Edit profile</h2>
         <form class="modal__form modal__form-js" name="profile-edit-form">
-          <!--change class to "modal__input modal__input_type_profile-title-js"-->
-          <!--original class name: "modal__profile-title modal__profile-title-js"-->
           <input
             type="text"
             name="name"
@@ -77,11 +75,9 @@
             placeholder="Name"
             required
           />
-          <!--change class to "modal__input modal__input_type_profile-description-js"-->
-          <!--original class name "modal__profile-description modal__profile-description-js"-->
           <input
             type="text"
-            name="about me"
+            name="description"
             class="modal__input modal__input_type_profile-description-js"
             placeholder="Description"
             required
@@ -93,7 +89,7 @@
       </div>
     </div>
     <!--Add Card Modal-->
-    <div class="modal modal-add-card-js"></div>
+    <div class="modal modal-add-card-js">
       <div class="modal__container">
         <button
           type="button"
@@ -116,15 +112,32 @@
             placeholder="Image link"
             required
           />
-          <button class="modal__save-button" type="submit" name="save">
-            Save
+          <button class="modal__save-button" type="submit" name="create">
+            Create
           </button>
         </form>
+      </div>
+    </div>
+    <!--Image Preview Modal-->
+    <div class="modal modal-image-preview-js">
+      <div class="modal__container modal__container_type_image-preview">
+        <button
+          type="button"
+          class="modal__close-button modal__close-button_type_image-preview modal__close-button-js"
+          name="close"
+        ></button>
+        <img src="" alt="" class="modal__image" />
+        <p class="modal__image-caption"></p>
       </div>
     </div>
     <template id="card-template">
       <li class="card">
         <img src="" alt="" class="card__image card__image-js" />
+        <button
+          class="card__delete-button"
+          aria-label="delete"
+          type="button"
+        ></button>
         <div class="card__description">
           <h2 class="card__title card__title-js"></h2>
           <button
