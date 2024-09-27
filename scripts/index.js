@@ -57,7 +57,7 @@ const addCardLinkInput = addCardModal.querySelector(
   ".modal__input_type_add-card-link-js"
 );
 const imagePreviewModal = document.querySelector(".modal-image-preview-js");
-const imagePreviewmodalImage = imagePreviewModal.querySelector(".modal__image");
+const imagePreviewModalImage = imagePreviewModal.querySelector(".modal__image");
 const imagePreviewModalCaption = imagePreviewModal.querySelector(
   ".modal__image-caption"
 );
@@ -83,7 +83,8 @@ function getCardElement(data) {
   });
 
   cardElementImage.addEventListener("click", () => {
-    imagePreviewmodalImage.src = data.link;
+    imagePreviewModalImage.src = data.link;
+    imagePreviewModalImage.alt = data.name;
     imagePreviewModalCaption.textContent = data.name;
     openModal(imagePreviewModal);
   });
