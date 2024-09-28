@@ -28,9 +28,6 @@ const initialCards = [
 //ELEMENTS
 const profileEditButton = document.querySelector(".profile__edit-button-js");
 const profileEditModal = document.querySelector(".modal-edit-js");
-const profileEditCloseButton = profileEditModal.querySelector(
-  ".modal__close-button-js"
-);
 const profileTitle = document.querySelector(".profile__title-js");
 const profileTitleInput = profileEditModal.querySelector(
   ".modal__input_type_profile-title-js"
@@ -46,9 +43,6 @@ const cardTemplate = document
 const cardList = document.querySelector(".gallery__cards-js");
 const addCardButton = document.querySelector(".profile__add-button");
 const addCardModal = document.querySelector(".modal-add-card-js");
-const addCardModalCloseButton = addCardModal.querySelector(
-  ".modal__close-button-js"
-);
 const addCardForm = document.forms["add-card-form"];
 const addCardTitleInput = addCardModal.querySelector(
   ".modal__input_type_add-card-title-js"
@@ -57,13 +51,11 @@ const addCardLinkInput = addCardModal.querySelector(
   ".modal__input_type_add-card-link-js"
 );
 const imagePreviewModal = document.querySelector(".modal-image-preview-js");
-const imagePreviewModalCloseButton = imagePreviewModal.querySelector(
-  ".modal__close-button-js"
-);
 const imagePreviewModalImage = imagePreviewModal.querySelector(".modal__image");
 const imagePreviewModalCaption = imagePreviewModal.querySelector(
   ".modal__image-caption"
 );
+const modalCloseButtons = document.querySelectorAll(".modal__close-button-js");
 
 //FUNCTIONS
 function openModal(modal) {
@@ -123,69 +115,20 @@ function handleAddCardSubmit(event) {
   event.target.reset();
 }
 
-//handler for close buttons in progress
-function handleCloseButtons() {
-  const closeButtons = document.querySelectorAll(".modal__close");
-
-  closeButtons.forEach((button) => {
-    // Find the closest popup only once
-    const popup = button.closest(".modal");
-    // Set the listener
-    button.addEventListener("click", () => closePopup(popup));
-  });
-}
-
-/*
-You can make a universal handler for any close buttons.
-It will look something like this:
-
-// Find all close buttons
-const closeButtons = document.querySelectorAll('.modal__close');
-
-closeButtons.forEach((button) => {
-  // Find the closest popup only once
-  const popup = button.closest('.modal');
-  // Set the listener
-  button.addEventListener('click', () => closePopup(popup));
-});
-*/
-
 //EVENT LISTENERS
 profileEditButton.addEventListener("click", () => {
   openModal(profileEditModal);
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 });
-
-profileEditCloseButton.addEventListener("click", () =>
-  closeModal(profileEditModal)
-);
-
 profileEditForm.addEventListener("submit", handleProfileSubmit);
 addCardForm.addEventListener("submit", handleAddCardSubmit);
 addCardButton.addEventListener("click", () => openModal(addCardModal));
-addCardModalCloseButton.addEventListener("click", () =>
-  closeModal(addCardModal)
-);
 
-imagePreviewModalCloseButton.addEventListener("click", () =>
-  closeModal(imagePreviewModal)
-);
-
-/*
-You can make a universal handler for any close buttons.
-It will look something like this:
-
-// Find all close buttons
-const closeButtons = document.querySelectorAll('.modal__close');
-
-closeButtons.forEach((button) => {
-  // Find the closest popup only once
-  const popup = button.closest('.modal');
-  // Set the listener
-  button.addEventListener('click', () => closePopup(popup));
+modalCloseButtons.forEach((button) => {
+  const modal = button.closest(".modal-js");
+  button.addEventListener("click", () => closeModal(modal));
 });
- */
 
 // INITIAL CARDS LAYOUT
 initialCards.forEach((data) => renderCard(data));
