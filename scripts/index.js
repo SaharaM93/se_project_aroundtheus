@@ -57,6 +57,9 @@ const addCardLinkInput = addCardModal.querySelector(
   ".modal__input_type_add-card-link-js"
 );
 const imagePreviewModal = document.querySelector(".modal-image-preview-js");
+const imagePreviewModalCloseButton = imagePreviewModal.querySelector(
+  ".modal__close-button-js"
+);
 const imagePreviewModalImage = imagePreviewModal.querySelector(".modal__image");
 const imagePreviewModalCaption = imagePreviewModal.querySelector(
   ".modal__image-caption"
@@ -98,9 +101,9 @@ function getCardElement(data) {
   return cardElement;
 }
 
-function renderCard(data, list) {
+function renderCard(data, method = "prepend") {
   const cardElement = getCardElement(data);
-  list.prepend(cardElement);
+  cardList[method](cardElement);
 }
 
 //EVENT HANDLERS
@@ -115,9 +118,37 @@ function handleAddCardSubmit(event) {
   event.preventDefault();
   const name = addCardTitleInput.value;
   const link = addCardLinkInput.value;
-  renderCard({ name, link }, cardList);
+  renderCard({ name, link });
   closeModal(addCardModal);
+  event.target.reset();
 }
+
+//handler for close buttons in progress
+function handleCloseButtons() {
+  const closeButtons = document.querySelectorAll(".modal__close");
+
+  closeButtons.forEach((button) => {
+    // Find the closest popup only once
+    const popup = button.closest(".modal");
+    // Set the listener
+    button.addEventListener("click", () => closePopup(popup));
+  });
+}
+
+/*
+You can make a universal handler for any close buttons.
+It will look something like this:
+
+// Find all close buttons
+const closeButtons = document.querySelectorAll('.modal__close');
+
+closeButtons.forEach((button) => {
+  // Find the closest popup only once
+  const popup = button.closest('.modal');
+  // Set the listener
+  button.addEventListener('click', () => closePopup(popup));
+});
+*/
 
 //EVENT LISTENERS
 profileEditButton.addEventListener("click", () => {
@@ -137,9 +168,24 @@ addCardModalCloseButton.addEventListener("click", () =>
   closeModal(addCardModal)
 );
 
-imagePreviewModal.addEventListener("click", () =>
+imagePreviewModalCloseButton.addEventListener("click", () =>
   closeModal(imagePreviewModal)
 );
 
+/*
+You can make a universal handler for any close buttons.
+It will look something like this:
+
+// Find all close buttons
+const closeButtons = document.querySelectorAll('.modal__close');
+
+closeButtons.forEach((button) => {
+  // Find the closest popup only once
+  const popup = button.closest('.modal');
+  // Set the listener
+  button.addEventListener('click', () => closePopup(popup));
+});
+ */
+
 // INITIAL CARDS LAYOUT
-initialCards.forEach((data) => renderCard(data, cardList));
+initialCards.forEach((data) => renderCard(data));
