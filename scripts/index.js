@@ -41,7 +41,7 @@ const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 const cardList = document.querySelector(".gallery__cards-js");
-const addCardButton = document.querySelector(".profile__add-button");
+const addCardButton = document.querySelector(".profile__add-button-js");
 const addCardModal = document.querySelector(".modal-add-card-js");
 const addCardForm = document.forms["add-card-form"];
 const addCardTitleInput = addCardModal.querySelector(
@@ -51,9 +51,10 @@ const addCardLinkInput = addCardModal.querySelector(
   ".modal__input_type_add-card-link-js"
 );
 const imagePreviewModal = document.querySelector(".modal-image-preview-js");
-const imagePreviewModalImage = imagePreviewModal.querySelector(".modal__image");
+const imagePreviewModalImage =
+  imagePreviewModal.querySelector(".modal__image-js");
 const imagePreviewModalCaption = imagePreviewModal.querySelector(
-  ".modal__image-caption"
+  ".modal__image-caption-js"
 );
 const modalCloseButtons = document.querySelectorAll(".modal__close-button-js");
 
@@ -69,9 +70,9 @@ function closeModal(modal) {
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardElementImage = cardElement.querySelector(".card__image-js");
-  const cardDeleteButton = cardElement.querySelector(".card__delete-button");
+  const cardDeleteButton = cardElement.querySelector(".card__delete-button-js");
   const cardElementTitle = cardElement.querySelector(".card__title-js");
-  const cardLikeButton = cardElement.querySelector(".card__like-button");
+  const cardLikeButton = cardElement.querySelector(".card__like-button-js");
 
   cardDeleteButton.addEventListener("click", () => {
     cardElement.remove();

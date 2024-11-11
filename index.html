@@ -45,7 +45,7 @@
             <p class="profile__description profile__description-js">Explorer</p>
           </div>
           <button
-            class="profile__add-button"
+            class="profile__add-button profile__add-button-js"
             aria-label="add"
             type="button"
           ></button>
@@ -69,20 +69,33 @@
         <h2 class="modal__title">Edit profile</h2>
         <form class="modal__form modal__form-js" name="profile-edit-form">
           <input
+            id="input-name"
             type="text"
             name="name"
-            class="modal__input modal__input_type_profile-title-js"
+            class="modal__input modal__input-js modal__input_type_profile-title-js"
             placeholder="Name"
+            minlength="2"
+            maxlength="40"
             required
           />
+          <span id="input-name-error" class="modal__error"></span>
+
           <input
+            id="input-description"
             type="text"
             name="description"
-            class="modal__input modal__input_type_profile-description-js"
+            class="modal__input modal__input-js modal__input_type_profile-description-js"
             placeholder="Description"
+            minlength="2"
+            maxlength="200"
             required
           />
-          <button class="modal__save-button" type="submit" name="save">
+          <span id="input-description-error" class="modal__error"></span>
+          <button
+            class="modal__submit-button modal__submit-button-js"
+            type="submit"
+            name="save"
+          >
             Save
           </button>
         </form>
@@ -99,20 +112,31 @@
         <h2 class="modal__title">New place</h2>
         <form class="modal__form modal__form-js" name="add-card-form">
           <input
+            id="input-place-title"
             type="text"
             name="title"
-            class="modal__input modal__input_type_add-card-title-js"
+            class="modal__input modal__input-js modal__input_type_add-card-title-js"
             placeholder="Title"
+            minlength="1"
+            maxlength="30"
             required
           />
+          <span id="input-place-title-error" class="modal__error"></span>
+
           <input
-            type="text"
+            id="input-image-link"
+            type="url"
             name="link"
-            class="modal__input modal__input_type_add-card-link-js"
+            class="modal__input modal__input-js modal__input_type_add-card-link-js"
             placeholder="Image link"
             required
           />
-          <button class="modal__save-button" type="submit" name="create">
+          <span id="input-image-link-error" class="modal__error"></span>
+          <button
+            class="modal__submit-button modal__submit-button-js"
+            type="submit"
+            name="create"
+          >
             Create
           </button>
         </form>
@@ -126,22 +150,22 @@
           class="modal__close-button modal__close-button_type_image-preview modal__close-button-js"
           name="close"
         ></button>
-        <img src="" alt="" class="modal__image" />
-        <p class="modal__image-caption"></p>
+        <img src="" alt="" class="modal__image modal__image-js" />
+        <p class="modal__image-caption modal__image-caption-js"></p>
       </div>
     </div>
     <template id="card-template">
       <li class="card">
         <img src="" alt="" class="card__image card__image-js" />
         <button
-          class="card__delete-button"
+          class="card__delete-button card__delete-button-js"
           aria-label="delete"
           type="button"
         ></button>
         <div class="card__description">
           <h2 class="card__title card__title-js"></h2>
           <button
-            class="card__like-button"
+            class="card__like-button card__like-button-js"
             aria-label="like"
             type="button"
           ></button>
@@ -149,5 +173,6 @@
       </li>
     </template>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>
