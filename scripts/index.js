@@ -61,6 +61,11 @@ const modalCloseButtons = document.querySelectorAll(".modal__close-button-js");
 //FUNCTIONS
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  /* document.addEventListener("keydown", (evt) => {
+    if (evt.key === "Escape") {
+      closeModal(modal);
+    }
+  }); */
 }
 
 function closeModal(modal) {
@@ -101,14 +106,14 @@ function renderCard(data, method = "prepend") {
 
 //EVENT HANDLERS
 function handleProfileSubmit(event) {
-  event.preventDefault();
+  // event.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closeModal(profileEditModal);
 }
 
 function handleAddCardSubmit(event) {
-  event.preventDefault();
+  // event.preventDefault();
   const name = addCardTitleInput.value;
   const link = addCardLinkInput.value;
   renderCard({ name, link });
@@ -129,6 +134,20 @@ addCardButton.addEventListener("click", () => openModal(addCardModal));
 modalCloseButtons.forEach((button) => {
   const modal = button.closest(".modal-js");
   button.addEventListener("click", () => closeModal(modal));
+});
+
+//step 3 close modal by clicking outside of it
+document.addEventListener("click", () => {
+  //closeModal(profileEditModal);
+  //closeModal(addCardModal);
+});
+//step 4 cose modal with Esc key
+document.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    closeModal(profileEditModal);
+    closeModal(addCardModal);
+    closeModal(imagePreviewModal);
+  }
 });
 
 // INITIAL CARDS LAYOUT

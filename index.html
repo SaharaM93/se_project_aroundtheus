@@ -69,7 +69,7 @@
         <h2 class="modal__title">Edit profile</h2>
         <form class="modal__form modal__form-js" name="profile-edit-form">
           <input
-            id="input-name"
+            id="name-input"
             type="text"
             name="name"
             class="modal__input modal__input-js modal__input_type_profile-title-js"
@@ -78,10 +78,13 @@
             maxlength="40"
             required
           />
-          <span id="input-name-error" class="modal__error"></span>
+          <span
+            id="name-input-error"
+            class="modal__error name-input-error"
+          ></span>
 
           <input
-            id="input-description"
+            id="description-input"
             type="text"
             name="description"
             class="modal__input modal__input-js modal__input_type_profile-description-js"
@@ -90,7 +93,10 @@
             maxlength="200"
             required
           />
-          <span id="input-description-error" class="modal__error"></span>
+          <span
+            id="description-input-error"
+            class="modal__error description-input-error"
+          ></span>
           <button
             class="modal__submit-button modal__submit-button-js"
             type="submit"
@@ -112,7 +118,7 @@
         <h2 class="modal__title">New place</h2>
         <form class="modal__form modal__form-js" name="add-card-form">
           <input
-            id="input-place-title"
+            id="card-title-input"
             type="text"
             name="title"
             class="modal__input modal__input-js modal__input_type_add-card-title-js"
@@ -121,17 +127,23 @@
             maxlength="30"
             required
           />
-          <span id="input-place-title-error" class="modal__error"></span>
+          <span
+            id="card-title-input-error"
+            class="modal__error card-title-input-error"
+          ></span>
 
           <input
-            id="input-image-link"
+            id="card-image-link-input"
             type="url"
             name="link"
             class="modal__input modal__input-js modal__input_type_add-card-link-js"
             placeholder="Image link"
             required
           />
-          <span id="input-image-link-error" class="modal__error"></span>
+          <span
+            id="card-image-link-input-error"
+            class="modal__error card-image-link-input-error"
+          ></span>
           <button
             class="modal__submit-button modal__submit-button-js"
             type="submit"
