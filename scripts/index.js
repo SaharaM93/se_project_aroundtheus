@@ -57,19 +57,19 @@ const imagePreviewModalCaption = imagePreviewModal.querySelector(
   ".modal__image-caption-js"
 );
 const modalCloseButtons = document.querySelectorAll(".modal__close-button-js");
+const modals = document.querySelectorAll(".modal-js");
 
 //FUNCTIONS
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  /* document.addEventListener("keydown", (evt) => {
-    if (evt.key === "Escape") {
-      closeModal(modal);
-    }
-  }); */
+  modal.addEventListener("mousedown", handleCloseModalByClickOverlay);
+  document.addEventListener("keydown", handleCloseModalByEsc);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  modal.removeEventListener("mousedown", handleCloseModalByClickOverlay);
+  document.removeEventListener("keydown", handleCloseModalByEsc);
 }
 
 function getCardElement(data) {
@@ -105,15 +105,13 @@ function renderCard(data, method = "prepend") {
 }
 
 //EVENT HANDLERS
-function handleProfileSubmit(event) {
-  // event.preventDefault();
+function handleProfileSubmit() {
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closeModal(profileEditModal);
 }
 
 function handleAddCardSubmit(event) {
-  // event.preventDefault();
   const name = addCardTitleInput.value;
   const link = addCardLinkInput.value;
   renderCard({ name, link });
@@ -121,11 +119,34 @@ function handleAddCardSubmit(event) {
   event.target.reset();
 }
 
+function handleCloseModalByEsc(evt) {
+  modals.forEach((modal) => {
+    if (evt.key === "Escape") {
+      closeModal(modal);
+    }
+  });
+}
+
+function handleCloseModalByClickOverlay(evt) {
+  modals.forEach((modal) => {
+    if (evt.target === modal) {
+      closeModal(modal);
+    }
+  });
+}
+
 //EVENT LISTENERS
 profileEditButton.addEventListener("click", () => {
   openModal(profileEditModal);
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
+  //resetValidation(); add function that resets error messages
+  //resetValidation(formElement, inputElements, classSelectors);
+  resetValidation(
+    profileEditForm,
+    [profileTitleInput, profileDescriptionInput],
+    formClassSelectors
+  );
 });
 profileEditForm.addEventListener("submit", handleProfileSubmit);
 addCardForm.addEventListener("submit", handleAddCardSubmit);
@@ -134,20 +155,6 @@ addCardButton.addEventListener("click", () => openModal(addCardModal));
 modalCloseButtons.forEach((button) => {
   const modal = button.closest(".modal-js");
   button.addEventListener("click", () => closeModal(modal));
-});
-
-//step 3 close modal by clicking outside of it
-document.addEventListener("click", () => {
-  //closeModal(profileEditModal);
-  //closeModal(addCardModal);
-});
-//step 4 cose modal with Esc key
-document.addEventListener("keydown", (evt) => {
-  if (evt.key === "Escape") {
-    closeModal(profileEditModal);
-    closeModal(addCardModal);
-    closeModal(imagePreviewModal);
-  }
 });
 
 // INITIAL CARDS LAYOUT

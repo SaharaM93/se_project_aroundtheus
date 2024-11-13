@@ -35,11 +35,19 @@ function hasInvalidInput(inputElements) {
   });
 }
 
+function resetValidation(formElement, inputElements, classSelectors) {
+  inputElements.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, classSelectors);
+  });
+}
+
 function toggleButtonState(inputElements, formSubmitButton, classSelectors) {
   if (hasInvalidInput(inputElements)) {
     formSubmitButton.classList.add(classSelectors.inactiveButtonClass);
+    formSubmitButton.disabled = true;
   } else {
     formSubmitButton.classList.remove(classSelectors.inactiveButtonClass);
+    formSubmitButton.disabled = false;
   }
 }
 
