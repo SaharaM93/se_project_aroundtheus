@@ -120,11 +120,9 @@ function handleAddCardSubmit(event) {
 }
 
 function handleCloseModalByEsc(evt) {
-  modals.forEach((modal) => {
-    if (evt.key === "Escape") {
-      closeModal(modal);
-    }
-  });
+  if (evt.key === "Escape") {
+    modals.forEach(closeModal);
+  }
 }
 
 function handleCloseModalByClickOverlay(evt) {
@@ -140,8 +138,6 @@ profileEditButton.addEventListener("click", () => {
   openModal(profileEditModal);
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  //resetValidation(); add function that resets error messages
-  //resetValidation(formElement, inputElements, classSelectors);
   resetValidation(
     profileEditForm,
     [profileTitleInput, profileDescriptionInput],
