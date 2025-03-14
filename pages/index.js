@@ -1,3 +1,5 @@
+import Card from "../components/Card.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -24,6 +26,14 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+
+const cardData = {
+  name: "Yosemite Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+};
+
+const newCardData = new Card(cardData, "#card-template" /*handleImageClick*/);
+newCardData.generateCard();
 
 //ELEMENTS
 const profileEditButton = document.querySelector(".profile__edit-button-js");
@@ -79,9 +89,9 @@ function getCardElement(data) {
   const cardElementTitle = cardElement.querySelector(".card__title-js");
   const cardLikeButton = cardElement.querySelector(".card__like-button-js");
 
-  cardDeleteButton.addEventListener("click", () => {
+  /* cardDeleteButton.addEventListener("click", () => {
     cardElement.remove();
-  });
+  }); */
 
   cardElementImage.addEventListener("click", () => {
     imagePreviewModalImage.src = data.link;
@@ -90,9 +100,9 @@ function getCardElement(data) {
     openModal(imagePreviewModal);
   });
 
-  cardLikeButton.addEventListener("click", () => {
+  /* cardLikeButton.addEventListener("click", () => {
     cardLikeButton.classList.toggle("card__like-button_active");
-  });
+  }); */
   cardElementImage.src = data.link;
   cardElementImage.alt = data.name;
   cardElementTitle.textContent = data.name;
@@ -101,6 +111,8 @@ function getCardElement(data) {
 
 function renderCard(data, method = "prepend") {
   const cardElement = getCardElement(data);
+  //const card = new Card(data, "#card-template");
+  //const cardElement = card.generateCard();
   cardList[method](cardElement);
 }
 
