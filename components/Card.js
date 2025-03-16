@@ -1,15 +1,14 @@
 export default class Card {
-  constructor(data, cardSelector /*handleImageClick */) {
+  constructor(data, cardSelector, handleImageClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
-    /*this._handleImageClick = handleImageClick; */
+    this._handleImageClick = handleImageClick;
   }
 
   _getCardTemplate() {
-    this._cardElement = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".card")
+    this._cardElement = this._cardSelector.content
+      .querySelector(".card")
       .cloneNode(true);
     return this._cardElement;
   }
@@ -26,18 +25,20 @@ export default class Card {
       .addEventListener("click", () => {
         this._handleLikeButton();
       });
+
+    this._element
+      .querySelector(".card__image-js")
+      .addEventListener("click", () => {
+        this._handleImageClick(this);
+      });
   }
 
   generateCard() {
-    //grab template
     this._element = this._getCardTemplate();
-    //add data
     this._element.querySelector(".card__image-js").src = this._link;
     this._element.querySelector(".card__image-js").alt = this._name;
     this._element.querySelector(".card__title-js").textContent = this._name;
-    //set event listeners
     this._setEventListeners();
-    //return the element
     return this._element;
   }
 

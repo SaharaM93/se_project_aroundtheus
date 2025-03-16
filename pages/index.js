@@ -27,14 +27,6 @@ const initialCards = [
   },
 ];
 
-const cardData = {
-  name: "Yosemite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-};
-
-const newCardData = new Card(cardData, "#card-template" /*handleImageClick*/);
-newCardData.generateCard();
-
 //ELEMENTS
 const profileEditButton = document.querySelector(".profile__edit-button-js");
 const profileEditModal = document.querySelector(".modal-edit-js");
@@ -47,9 +39,7 @@ const profileDescriptionInput = profileEditModal.querySelector(
   ".modal__input_type_profile-description-js"
 );
 const profileEditForm = document.forms["profile-edit-form"];
-const cardTemplate = document
-  .querySelector("#card-template")
-  .content.querySelector(".card");
+const cardTemplate = document.querySelector("#card-template");
 const cardList = document.querySelector(".gallery__cards-js");
 const addCardButton = document.querySelector(".profile__add-button-js");
 const addCardModal = document.querySelector(".modal-add-card-js");
@@ -82,38 +72,9 @@ function closeModal(modal) {
   document.removeEventListener("keydown", handleCloseModalByEsc);
 }
 
-function getCardElement(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardElementImage = cardElement.querySelector(".card__image-js");
-  const cardDeleteButton = cardElement.querySelector(".card__delete-button-js");
-  const cardElementTitle = cardElement.querySelector(".card__title-js");
-  const cardLikeButton = cardElement.querySelector(".card__like-button-js");
-
-  /* cardDeleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  }); */
-
-  cardElementImage.addEventListener("click", () => {
-    imagePreviewModalImage.src = data.link;
-    imagePreviewModalImage.alt = data.name;
-    imagePreviewModalCaption.textContent = data.name;
-    openModal(imagePreviewModal);
-  });
-
-  /* cardLikeButton.addEventListener("click", () => {
-    cardLikeButton.classList.toggle("card__like-button_active");
-  }); */
-  cardElementImage.src = data.link;
-  cardElementImage.alt = data.name;
-  cardElementTitle.textContent = data.name;
-  return cardElement;
-}
-
 function renderCard(data, method = "prepend") {
-  const cardElement = getCardElement(data);
-  //const card = new Card(data, "#card-template");
-  //const cardElement = card.generateCard();
-  cardList[method](cardElement);
+  const cardElement = new Card(data, cardTemplate, handleImagePreview);
+  cardList[method](cardElement.generateCard());
 }
 
 //EVENT HANDLERS
@@ -129,6 +90,13 @@ function handleAddCardSubmit(event) {
   renderCard({ name, link });
   closeModal(addCardModal);
   event.target.reset();
+}
+
+function handleImagePreview(data) {
+  imagePreviewModalImage.src = data._link;
+  imagePreviewModalImage.alt = data._name;
+  imagePreviewModalCaption.textContent = data._name;
+  openModal(imagePreviewModal);
 }
 
 function handleCloseModalByEsc(evt) {
