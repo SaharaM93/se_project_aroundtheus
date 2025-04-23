@@ -1,4 +1,5 @@
 import Card from "../components/Card.js";
+// import FormValidator from "../components/FormValidator.js";
 
 const initialCards = [
   {
@@ -91,11 +92,11 @@ function handleAddCardSubmit(event) {
   closeModal(addCardModal);
   event.target.reset();
 }
-
+//handler still needs work
 function handleImagePreview(data) {
-  imagePreviewModalImage.src = data._link;
-  imagePreviewModalImage.alt = data._name;
-  imagePreviewModalCaption.textContent = data._name;
+  imagePreviewModalImage.src = data.link;
+  imagePreviewModalImage.alt = data.name;
+  imagePreviewModalCaption.textContent = data.name;
   openModal(imagePreviewModal);
 }
 
@@ -118,6 +119,7 @@ profileEditButton.addEventListener("click", () => {
   openModal(profileEditModal);
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
+  //reset validation is public method
   resetValidation(
     profileEditForm,
     [profileTitleInput, profileDescriptionInput],
