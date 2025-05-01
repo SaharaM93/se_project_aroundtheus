@@ -73,7 +73,16 @@ function closeModal(modal) {
   document.removeEventListener("keydown", handleCloseModalByEsc);
 }
 
-function renderCard(data, method = "prepend") {
+//create card function to generate a card before adding it to the wrapper
+/* function createNewCard(data) {
+  const newCard = new Card(data, cardTemplate, handleImagePreview);
+  return newCard.generateCard();
+} */
+
+function renderCard(data, /*wrapper*/ method = "prepend") {
+  //implementing createNewCardFunction
+  //const cardElement = createNewCard(data);
+  //wrapper[method](cardElement.generatecard());
   const cardElement = new Card(data, cardTemplate, handleImagePreview);
   cardList[method](cardElement.generateCard());
 }
@@ -92,14 +101,22 @@ function handleAddCardSubmit(event) {
   closeModal(addCardModal);
   event.target.reset();
 }
-//handler still needs work
-function handleImagePreview(data) {
+//handler has been updated, refer to original for changes implemented
+function handleImagePreview(name, link) {
+  imagePreviewModalImage.src = link;
+  imagePreviewModalImage.alt = name;
+  imagePreviewModalCaption.textContent = name;
+  openModal(imagePreviewModal);
+}
+
+//original
+/* function handleImagePreview(data) {
   imagePreviewModalImage.src = data.link;
   imagePreviewModalImage.alt = data.name;
   imagePreviewModalCaption.textContent = data.name;
   openModal(imagePreviewModal);
 }
-
+ */
 function handleCloseModalByEsc(evt) {
   if (evt.key === "Escape") {
     modals.forEach(closeModal);

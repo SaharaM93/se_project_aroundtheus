@@ -1,19 +1,18 @@
 export default class Card {
-  constructor(data /* { name, link } */, cardSelector, handleImageClick) {
+  constructor(data, cardSelector, handleImageClick) {
     this._name = data.name;
     this._link = data.link;
-    // data parameter commented out in attempt to fix handler
-    /* this._name = name;
-    this._link = link; */
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
   }
 
   _getCardTemplate() {
-    this._cardElement = this._cardSelector.content
+    //changed from this._cardElement to this._element, consider changing it back before submission
+    this._element = this._cardSelector.content
       .querySelector(".card")
       .cloneNode(true);
-    return this._cardElement;
+    //changed from this._cardElement to this._element
+    return this._element;
   }
 
   _setEventListeners() {
@@ -32,10 +31,11 @@ export default class Card {
     this._element
       .querySelector(".card__image-js")
       .addEventListener("click", () => {
-        this._handleImageClick(this);
+        this._handleImageClick(this._name, this._link);
       });
   }
 
+  //consider renaming to getCardView to avoid confusion
   generateCard() {
     this._element = this._getCardTemplate();
     this._element.querySelector(".card__image-js").src = this._link;
@@ -54,5 +54,6 @@ export default class Card {
     this._element
       .querySelector(".card__like-button-js")
       .classList.toggle("card__like-button_active");
+    console.log(this._element); //testing
   }
 }
