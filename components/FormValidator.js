@@ -28,9 +28,9 @@ export default class FormValidator {
 
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
-      _showInputError(inputElement);
+      this._showInputError(inputElement);
     } else {
-      _hideInputError(inputElement);
+      this._hideInputError(inputElement);
     }
   }
 
@@ -42,13 +42,15 @@ export default class FormValidator {
 
   //reset validation is public method
   resetValidation() {
+    this._formElement.reset();
+    this._toggleButtonState();
     this._inputElements.forEach((inputElement) => {
-      _hideInputError(inputElement);
+      this._hideInputError(inputElement);
     });
   }
 
   _toggleButtonState() {
-    if (this._hasInvalidInput) {
+    if (this._hasInvalidInput()) {
       this._formSubmitButton.classList.add(this._inactiveButtonClass);
       this._formSubmitButton.disabled = true;
     } else {
@@ -65,12 +67,12 @@ export default class FormValidator {
       this._submitButtonSelector
     );
 
-    this._toggleButtonState(inputElement);
+    this._toggleButtonState();
 
     this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(inputElement);
+        this._toggleButtonState();
       });
     });
   }
@@ -80,29 +82,6 @@ export default class FormValidator {
       evt.preventDefault();
     });
 
-    this._setEventListeners(); //double check these arguments
+    this._setEventListeners();
   }
 }
-
-//double check all the parameters and arguments that include "settings" and an element as we have access to these already in the constructor
-//remove all unnecessary arguments and parameters before project submission
-
-//This object belongs in index.js, doesn't need to be exported
-const formClassSelectors = {
-  formSelector: ".modal__form-js",
-  inputSelector: ".modal__input-js",
-  submitButtonSelector: ".modal__submit-button-js",
-  inactiveButtonClass: "modal__submit-button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-
-//to be implemented in index.js
-/* const profileEditFormValidator = new FormValidator(
-  formClassSelectors,
-  profileEditForm
-);
-profileEditFormValidator.enableValidation();
-
-const addCardFormValidator = new FormValidator(formClassSelectors, addCardForm);
-addCardFormValidator.enableValidation(); */

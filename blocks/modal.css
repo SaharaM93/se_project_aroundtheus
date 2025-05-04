@@ -52,10 +52,6 @@
 .modal__image {
   max-width: 75vw;
   max-height: 75vh;
-  /*testing*/
-  /* min-width: 50vw;
-  min-height: 50vw; */
-  /*testing*/
   object-fit: cover;
 }
 

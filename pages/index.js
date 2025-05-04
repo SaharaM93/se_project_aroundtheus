@@ -1,5 +1,5 @@
 import Card from "../components/Card.js";
-// import FormValidator from "../components/FormValidator.js";
+import FormValidator from "../components/FormValidator.js";
 
 const initialCards = [
   {
@@ -60,6 +60,24 @@ const imagePreviewModalCaption = imagePreviewModal.querySelector(
 const modalCloseButtons = document.querySelectorAll(".modal__close-button-js");
 const modals = document.querySelectorAll(".modal-js");
 
+const formValidationSettings = {
+  inputSelector: ".modal__input-js",
+  submitButtonSelector: ".modal__submit-button-js",
+  inactiveButtonClass: "modal__submit-button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const profileEditFormValidator = new FormValidator(
+  formValidationSettings,
+  profileEditForm
+);
+
+const addCardFormValidator = new FormValidator(
+  formValidationSettings,
+  addCardForm
+);
+
 //FUNCTIONS
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -73,18 +91,14 @@ function closeModal(modal) {
   document.removeEventListener("keydown", handleCloseModalByEsc);
 }
 
-//create card function to generate a card before adding it to the wrapper
-/* function createNewCard(data) {
+function createNewCard(data) {
   const newCard = new Card(data, cardTemplate, handleImagePreview);
-  return newCard.generateCard();
-} */
+  return newCard;
+}
 
-function renderCard(data, /*wrapper*/ method = "prepend") {
-  //implementing createNewCardFunction
-  //const cardElement = createNewCard(data);
-  //wrapper[method](cardElement.generatecard());
-  const cardElement = new Card(data, cardTemplate, handleImagePreview);
-  cardList[method](cardElement.generateCard());
+function renderCard(data, wrapper, method = "prepend") {
+  const cardElement = createNewCard(data);
+  wrapper[method](cardElement.getCardView());
 }
 
 //EVENT HANDLERS
@@ -92,16 +106,17 @@ function handleProfileSubmit() {
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closeModal(profileEditModal);
+  profileEditFormValidator.resetValidation();
 }
 
-function handleAddCardSubmit(event) {
+function handleAddCardSubmit() {
   const name = addCardTitleInput.value;
   const link = addCardLinkInput.value;
-  renderCard({ name, link });
+  renderCard({ name, link }, cardList);
   closeModal(addCardModal);
-  event.target.reset();
+  addCardFormValidator.resetValidation();
 }
-//handler has been updated, refer to original for changes implemented
+
 function handleImagePreview(name, link) {
   imagePreviewModalImage.src = link;
   imagePreviewModalImage.alt = name;
@@ -109,14 +124,6 @@ function handleImagePreview(name, link) {
   openModal(imagePreviewModal);
 }
 
-//original
-/* function handleImagePreview(data) {
-  imagePreviewModalImage.src = data.link;
-  imagePreviewModalImage.alt = data.name;
-  imagePreviewModalCaption.textContent = data.name;
-  openModal(imagePreviewModal);
-}
- */
 function handleCloseModalByEsc(evt) {
   if (evt.key === "Escape") {
     modals.forEach(closeModal);
@@ -136,16 +143,14 @@ profileEditButton.addEventListener("click", () => {
   openModal(profileEditModal);
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  //reset validation is public method
-  resetValidation(
-    profileEditForm,
-    [profileTitleInput, profileDescriptionInput],
-    formClassSelectors
-  );
+  profileEditFormValidator.enableValidation();
 });
 profileEditForm.addEventListener("submit", handleProfileSubmit);
 addCardForm.addEventListener("submit", handleAddCardSubmit);
-addCardButton.addEventListener("click", () => openModal(addCardModal));
+addCardButton.addEventListener("click", () => {
+  openModal(addCardModal);
+  addCardFormValidator.enableValidation();
+});
 
 modalCloseButtons.forEach((button) => {
   const modal = button.closest(".modal-js");
@@ -153,4 +158,4 @@ modalCloseButtons.forEach((button) => {
 });
 
 // INITIAL CARDS LAYOUT
-initialCards.forEach((data) => renderCard(data));
+initialCards.forEach((data) => renderCard(data, cardList));

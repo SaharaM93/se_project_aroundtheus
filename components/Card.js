@@ -7,11 +7,9 @@ export default class Card {
   }
 
   _getCardTemplate() {
-    //changed from this._cardElement to this._element, consider changing it back before submission
     this._element = this._cardSelector.content
       .querySelector(".card")
       .cloneNode(true);
-    //changed from this._cardElement to this._element
     return this._element;
   }
 
@@ -35,8 +33,7 @@ export default class Card {
       });
   }
 
-  //consider renaming to getCardView to avoid confusion
-  generateCard() {
+  getCardView() {
     this._element = this._getCardTemplate();
     this._element.querySelector(".card__image-js").src = this._link;
     this._element.querySelector(".card__image-js").alt = this._name;
@@ -54,6 +51,5 @@ export default class Card {
     this._element
       .querySelector(".card__like-button-js")
       .classList.toggle("card__like-button_active");
-    console.log(this._element); //testing
   }
 }
