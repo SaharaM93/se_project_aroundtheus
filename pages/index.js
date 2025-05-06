@@ -72,11 +72,13 @@ const profileEditFormValidator = new FormValidator(
   formValidationSettings,
   profileEditForm
 );
+profileEditFormValidator.enableValidation();
 
 const addCardFormValidator = new FormValidator(
   formValidationSettings,
   addCardForm
 );
+addCardFormValidator.enableValidation();
 
 //FUNCTIONS
 function openModal(modal) {
@@ -106,7 +108,6 @@ function handleProfileSubmit() {
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closeModal(profileEditModal);
-  profileEditFormValidator.resetValidation();
 }
 
 function handleAddCardSubmit() {
@@ -114,6 +115,7 @@ function handleAddCardSubmit() {
   const link = addCardLinkInput.value;
   renderCard({ name, link }, cardList);
   closeModal(addCardModal);
+  addCardForm.reset();
   addCardFormValidator.resetValidation();
 }
 
@@ -140,16 +142,15 @@ function handleCloseModalByClickOverlay(evt) {
 
 //EVENT LISTENERS
 profileEditButton.addEventListener("click", () => {
-  openModal(profileEditModal);
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  profileEditFormValidator.enableValidation();
+  openModal(profileEditModal);
+  profileEditFormValidator.resetValidation();
 });
 profileEditForm.addEventListener("submit", handleProfileSubmit);
 addCardForm.addEventListener("submit", handleAddCardSubmit);
 addCardButton.addEventListener("click", () => {
   openModal(addCardModal);
-  addCardFormValidator.enableValidation();
 });
 
 modalCloseButtons.forEach((button) => {
