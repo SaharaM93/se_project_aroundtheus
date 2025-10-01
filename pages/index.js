@@ -1,5 +1,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js"; //new Class import
 
 const initialCards = [
   {
@@ -41,7 +42,7 @@ const profileDescriptionInput = profileEditModal.querySelector(
 );
 const profileEditForm = document.forms["profile-edit-form"];
 const cardTemplate = document.querySelector("#card-template");
-const cardList = document.querySelector(".gallery__cards-js");
+const cardListGallery = document.querySelector(".gallery__cards-js");
 const addCardButton = document.querySelector(".profile__add-button-js");
 const addCardModal = document.querySelector(".modal-add-card-js");
 const addCardForm = document.forms["add-card-form"];
@@ -80,6 +81,20 @@ const addCardFormValidator = new FormValidator(
 );
 addCardFormValidator.enableValidation();
 
+//cardsListSection SECTION IN PROGRESS
+const cardsListSection = new Section(
+  {
+    items: initialCards,
+    renderer: (cardItem) => {
+      const card = new Card(cardItem, cardTemplate, handleImagePreview);
+
+      const cardElement = card.getCardView();
+      cardsListSection.addItem(cardElement);
+    },
+  },
+  cardListGallery
+);
+
 //FUNCTIONS
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -97,7 +112,7 @@ function createNewCard(data) {
   const newCard = new Card(data, cardTemplate, handleImagePreview);
   return newCard;
 }
-
+//renderCard function might need refactoring to incorporate addItem() function
 function renderCard(data, wrapper, method = "prepend") {
   const cardElement = createNewCard(data);
   wrapper[method](cardElement.getCardView());
@@ -113,7 +128,7 @@ function handleProfileSubmit() {
 function handleAddCardSubmit() {
   const name = addCardTitleInput.value;
   const link = addCardLinkInput.value;
-  renderCard({ name, link }, cardList);
+  renderCard({ name, link }, cardListGallery);
   closeModal(addCardModal);
   addCardForm.reset();
   addCardFormValidator.resetValidation();
@@ -159,4 +174,7 @@ modalCloseButtons.forEach((button) => {
 });
 
 // INITIAL CARDS LAYOUT
-initialCards.forEach((data) => renderCard(data, cardList));
+// initialCards.forEach((data) => renderCard(data, cardListGallery));
+
+//REFACTORED INITAL CARDS LAYOUT
+cardsListSection.renderItems();
