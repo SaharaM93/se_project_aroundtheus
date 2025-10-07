@@ -92,7 +92,7 @@ const cardsListSection = new Section(
       cardsListSection.addItem(cardElement);
     },
   },
-  cardListGallery
+  ".gallery__cards-js"
 );
 
 //FUNCTIONS
@@ -113,6 +113,8 @@ function createNewCard(data) {
   return newCard;
 }
 //renderCard function might need refactoring to incorporate addItem() function
+//possible update idea: remove wrapper and method parameters, add "cardListGallery.setItem();" line to handleAddCardSubmit
+//change "wrapper[method](cardElement.getCardView());" line to "wrapper.addItem(cardElement.getCardView());" ?? or something of that nature
 function renderCard(data, wrapper, method = "prepend") {
   const cardElement = createNewCard(data);
   wrapper[method](cardElement.getCardView());
