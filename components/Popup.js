@@ -1,5 +1,5 @@
-class Popup {
-  constructor(popupSelector) {
+export default class Popup {
+  constructor({ popupSelector }) {
     this._popup = document.querySelector(popupSelector);
   }
 
@@ -24,7 +24,11 @@ class Popup {
       .addEventListener("click", () => {
         this.close();
       });
-    /* The modal window should also close when users click
-      on the shaded area around the form. */
+
+    this._popup.addEventListener("click", () => {
+      this.close();
+    });
+
+    //add _handleEscClose() to the even listeners??
   }
 }
