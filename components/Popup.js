@@ -6,6 +6,8 @@ export default class Popup {
   open() {
     this._popup.classList.add("modal_opened");
   }
+  /* The open() method should be called in the preexisting
+  event handlers in index.js */
 
   close() {
     //when you select the ".modal__close-button-js" this function will run
