@@ -1,14 +1,15 @@
 import Popup from "./Popup.js";
 export default class PopupWithForm extends Popup {
-  constructor({ popupSelector, handleFormSubmit }) {
-    super({ popupSelector });
-    this._popupForm = this._popup.querySelector("modal__form-js");
+  constructor(popupSelector, handleFormSubmit) {
+    super(popupSelector);
+    this._popupForm = this._popup.querySelector(".modal__form-js");
     this._handleFormSubmit = handleFormSubmit;
+    // is this for the handleAddCardSubmit to be passed in index.js??
   }
 
   //change value of form input name attribute from "title" to "name"
   _getInputValues() {
-    this._inputList = this._popupForm.querySelectorAll("modal__input-js");
+    this._inputList = this._popupForm.querySelectorAll(".modal__input-js");
 
     this._formValues = {};
 
@@ -24,12 +25,14 @@ export default class PopupWithForm extends Popup {
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
-      this._popupForm.reset(); //this._popupForm.close(); instead???
+      this._popup.close(); //move to public handler ??
     });
   }
 
   close() {
+    this._popupForm.reset();
     super.close();
+    //referring to video to understand the necessity to override
     //this._popupForm.reset(); ??? i dont think this is necessary
   }
 

@@ -96,13 +96,23 @@ const cardsListSection = new Section(
   ".gallery__cards-js"
 );
 
+const addCardPopup = new PopupWithForm(".modal-add-card-js", (formData) => {
+  const newCard = new Card(formData, cardTemplate, handleImagePreview);
+
+  const newCardElement = newCard.getCardView();
+  cardsListSection.addItem(newCardElement);
+});
+addCardPopup.setEventListeners();
+
 //FUNCTIONS
+//no longer needed as the function is being established in the Popup class
 function openModal(modal) {
   modal.classList.add("modal_opened");
   modal.addEventListener("mousedown", handleCloseModalByClickOverlay);
   document.addEventListener("keydown", handleCloseModalByEsc);
 }
 
+//no longer needed as the function is being established in the Popup class
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   modal.removeEventListener("mousedown", handleCloseModalByClickOverlay);
@@ -126,6 +136,7 @@ function handleProfileSubmit() {
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closeModal(profileEditModal);
+  //change to profileEditModal.close(); ??
 }
 
 function handleAddCardSubmit() {
@@ -133,8 +144,9 @@ function handleAddCardSubmit() {
   const link = addCardLinkInput.value;
   renderCard({ name, link }, cardListGallery);
   closeModal(addCardModal);
+  //change to addCardPopup.close(); ??
   addCardForm.reset();
-  addCardFormValidator.resetValidation();
+  addCardFormValidator.resetValidation(); //move to addCardForm submit callback
 }
 
 function handleImagePreview(name, link) {
@@ -143,13 +155,14 @@ function handleImagePreview(name, link) {
   imagePreviewModalCaption.textContent = name;
   openModal(imagePreviewModal);
 }
-
+//this function is no longer necessary, method is established in Popup class
 function handleCloseModalByEsc(evt) {
   if (evt.key === "Escape") {
     modals.forEach(closeModal);
   }
 }
 
+//this function is no longer necessary, method is established in Popup class
 function handleCloseModalByClickOverlay(evt) {
   modals.forEach((modal) => {
     if (evt.target === modal) {
@@ -170,12 +183,12 @@ addCardForm.addEventListener("submit", handleAddCardSubmit);
 addCardButton.addEventListener("click", () => {
   openModal(addCardModal);
 });
-
+/*no longer needed as the modals closing is controlled by the Popup
+class event listeners */
 modalCloseButtons.forEach((button) => {
   const modal = button.closest(".modal-js");
   button.addEventListener("click", () => closeModal(modal));
-}); /*no longer needed as the modals closing is controlled by the Popup
-class event listeners */
+});
 
 // INITIAL CARDS LAYOUT
 // initialCards.forEach((data) => renderCard(data, cardListGallery));
