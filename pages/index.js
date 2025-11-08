@@ -1,6 +1,7 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js"; //new Class import
+import PopupWithForm from "../components/PopupWithForm.js"; //new Class import
 
 const initialCards = [
   {
@@ -173,7 +174,8 @@ addCardButton.addEventListener("click", () => {
 modalCloseButtons.forEach((button) => {
   const modal = button.closest(".modal-js");
   button.addEventListener("click", () => closeModal(modal));
-});
+}); /*no longer needed as the modals closing is controlled by the Popup
+class event listeners */
 
 // INITIAL CARDS LAYOUT
 // initialCards.forEach((data) => renderCard(data, cardListGallery));

@@ -5,16 +5,21 @@ export default class Popup {
 
   open() {
     this._popup.classList.add("modal_opened");
+    document.addEventListener("keydown", () => {
+      this._handleEscClose();
+    });
   }
   /* The open() method should be called in the preexisting
   event handlers in index.js */
 
   close() {
-    //when you select the ".modal__close-button-js" this function will run
     this._popup.classList.remove("modal_opened");
+    document.removeEventListener("keydown", () => {
+      this._handleEscClose();
+    });
   }
 
-  _handleEscClose() {
+  _handleEscClose(evt) {
     if (evt.key === "Escape") {
       this._popup.close();
     }
@@ -27,10 +32,8 @@ export default class Popup {
         this.close();
       });
 
-    this._popup.addEventListener("click", () => {
+    this._popup.addEventListener("mousedown", () => {
       this.close();
     });
-
-    //add _handleEscClose() to the even listeners??
   }
 }
