@@ -101,6 +101,7 @@ const addCardPopup = new PopupWithForm(".modal-add-card-js", (formData) => {
 
   const newCardElement = newCard.getCardView();
   cardsListSection.addItem(newCardElement);
+  //addCardPopup.close(); is this needed??
 });
 addCardPopup.setEventListeners();
 
@@ -108,8 +109,8 @@ addCardPopup.setEventListeners();
 //no longer needed as the function is being established in the Popup class
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  modal.addEventListener("mousedown", handleCloseModalByClickOverlay);
-  document.addEventListener("keydown", handleCloseModalByEsc);
+  //modal.addEventListener("mousedown", handleCloseModalByClickOverlay);
+  //document.addEventListener("keydown", handleCloseModalByEsc);
 }
 
 //no longer needed as the function is being established in the Popup class
@@ -179,16 +180,17 @@ profileEditButton.addEventListener("click", () => {
   profileEditFormValidator.resetValidation();
 });
 profileEditForm.addEventListener("submit", handleProfileSubmit);
-addCardForm.addEventListener("submit", handleAddCardSubmit);
+//addCardForm.addEventListener("submit", handleAddCardSubmit);
 addCardButton.addEventListener("click", () => {
-  openModal(addCardModal);
+  //openModal(addCardModal); //original
+  addCardPopup.open(); //testing
 });
 /*no longer needed as the modals closing is controlled by the Popup
 class event listeners */
-modalCloseButtons.forEach((button) => {
+/* modalCloseButtons.forEach((button) => {
   const modal = button.closest(".modal-js");
   button.addEventListener("click", () => closeModal(modal));
-});
+}); */
 
 // INITIAL CARDS LAYOUT
 // initialCards.forEach((data) => renderCard(data, cardListGallery));
