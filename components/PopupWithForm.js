@@ -4,7 +4,6 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._popupForm = this._popup.querySelector(".modal__form-js");
     this._handleFormSubmit = handleFormSubmit;
-    // is this for the handleAddCardSubmit to be passed in index.js??
   }
 
   //change value of form input name attribute from "title" to "name"

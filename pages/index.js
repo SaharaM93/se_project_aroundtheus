@@ -91,18 +91,22 @@ const cardsListSection = new Section(
 
       const cardElement = card.getCardView();
       cardsListSection.addItem(cardElement);
+      //figuring out how to use createNewCard as renderer
     },
   },
   ".gallery__cards-js"
 );
 
-const addCardPopup = new PopupWithForm(".modal-add-card-js", (formData) => {
+const addCardPopup = new PopupWithForm(
+  ".modal-add-card-js",
+  handleAddCardSubmit /* (formData) => {
   const newCard = new Card(formData, cardTemplate, handleImagePreview);
 
   const newCardElement = newCard.getCardView();
   cardsListSection.addItem(newCardElement);
-  //addCardPopup.close(); is this needed??
-});
+  //addCardSumbit should be used as handler
+} */
+);
 addCardPopup.setEventListeners();
 
 //FUNCTIONS
@@ -130,6 +134,7 @@ function createNewCard(data) {
 function renderCard(data, wrapper, method = "prepend") {
   const cardElement = createNewCard(data);
   wrapper[method](cardElement.getCardView());
+  //this code remains relevant to handle addCard dubmit
 }
 
 //EVENT HANDLERS
@@ -144,9 +149,8 @@ function handleAddCardSubmit() {
   const name = addCardTitleInput.value;
   const link = addCardLinkInput.value;
   renderCard({ name, link }, cardListGallery);
-  closeModal(addCardModal);
-  //change to addCardPopup.close(); ??
-  addCardForm.reset();
+  addCardPopup.close();
+  //addCardForm.reset(); //this already happens with the close() method
   addCardFormValidator.resetValidation(); //move to addCardForm submit callback
 }
 
@@ -177,13 +181,14 @@ profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
   openModal(profileEditModal);
+  //profileEditModal.open();
   profileEditFormValidator.resetValidation();
 });
 profileEditForm.addEventListener("submit", handleProfileSubmit);
 //addCardForm.addEventListener("submit", handleAddCardSubmit);
 addCardButton.addEventListener("click", () => {
   //openModal(addCardModal); //original
-  addCardPopup.open(); //testing
+  addCardPopup.open(); //works
 });
 /*no longer needed as the modals closing is controlled by the Popup
 class event listeners */

@@ -9,7 +9,6 @@ export default class Popup {
   open() {
     this._popup.classList.add("modal_opened");
     document.addEventListener("keydown", this._handleEscClose);
-    //issue with binding the event listener
   }
   /* The open() method should be called in the preexisting
   event handlers in index.js */
