@@ -2,6 +2,7 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js"; //new Class import
 import PopupWithForm from "../components/PopupWithForm.js"; //new Class import
+import UserInfo from "../components/UserInfo.js";
 
 const initialCards = [
   {
@@ -87,12 +88,14 @@ const cardsListSection = new Section(
   {
     items: initialCards,
     renderer: (cardItem) => {
+      renderCard(cardItem);
+    } /* (cardItem) => {
       const card = new Card(cardItem, cardTemplate, handleImagePreview);
 
       const cardElement = card.getCardView();
       cardsListSection.addItem(cardElement);
       //figuring out how to use createNewCard as renderer
-    },
+    }, */,
   },
   ".gallery__cards-js"
 );
@@ -108,6 +111,13 @@ const addCardPopup = new PopupWithForm(
 } */
 );
 addCardPopup.setEventListeners();
+
+const editProfilePopup = new PopupWithForm(
+  ".modal-edit-js",
+  handleProfileSubmit
+);
+
+editProfilePopup.setEventListeners();
 
 //FUNCTIONS
 //no longer needed as the function is being established in the Popup class
@@ -131,9 +141,12 @@ function createNewCard(data) {
 //renderCard function might need refactoring to incorporate addItem() function
 //possible update idea: remove wrapper and method parameters, add "cardListGallery.setItem();" line to handleAddCardSubmit
 //change "wrapper[method](cardElement.getCardView());" line to "wrapper.addItem(cardElement.getCardView());" ?? or something of that nature
-function renderCard(data, wrapper, method = "prepend") {
-  const cardElement = createNewCard(data);
-  wrapper[method](cardElement.getCardView());
+function renderCard(data /* , wrapper, method = "prepend" */) {
+  const cardElement = createNewCard(data).getCardView();
+  cardsListSection.addItem(cardElement);
+  //const cardElement = createNewCard(data);
+  //wrapper[method](cardElement.getCardView());
+
   //this code remains relevant to handle addCard dubmit
 }
 
@@ -148,7 +161,7 @@ function handleProfileSubmit() {
 function handleAddCardSubmit() {
   const name = addCardTitleInput.value;
   const link = addCardLinkInput.value;
-  renderCard({ name, link }, cardListGallery);
+  renderCard({ name, link } /* , cardListGallery */);
   addCardPopup.close();
   //addCardForm.reset(); //this already happens with the close() method
   addCardFormValidator.resetValidation(); //move to addCardForm submit callback
@@ -178,10 +191,11 @@ function handleCloseModalByClickOverlay(evt) {
 
 //EVENT LISTENERS
 profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-  openModal(profileEditModal);
-  //profileEditModal.open();
+  //profileTitleInput.value = profileTitle.textContent;
+  //profileDescriptionInput.value = profileDescription.textContent;
+  const userData = new UserInfo({ profileTitle, profileDescription });
+  //openModal(profileEditModal);
+  editProfilePopup.open();
   profileEditFormValidator.resetValidation();
 });
 profileEditForm.addEventListener("submit", handleProfileSubmit);
