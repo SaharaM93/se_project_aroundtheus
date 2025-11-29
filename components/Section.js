@@ -12,7 +12,7 @@ export default class Section {
   }
 
   addItem(element) {
-    this._container.prepend(element); //prepend instead??
+    this._container.prepend(element);
   }
 }
 

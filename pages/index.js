@@ -88,7 +88,7 @@ const cardsListSection = new Section(
   {
     items: initialCards,
     renderer: (cardItem) => {
-      renderCard(cardItem);
+      renderCard(cardItem, cardsListSection);
     } /* (cardItem) => {
       const card = new Card(cardItem, cardTemplate, handleImagePreview);
 
@@ -141,12 +141,16 @@ function createNewCard(data) {
 //renderCard function might need refactoring to incorporate addItem() function
 //possible update idea: remove wrapper and method parameters, add "cardListGallery.setItem();" line to handleAddCardSubmit
 //change "wrapper[method](cardElement.getCardView());" line to "wrapper.addItem(cardElement.getCardView());" ?? or something of that nature
-function renderCard(data /* , wrapper, method = "prepend" */) {
+function renderCard(data, wrapper) {
   const cardElement = createNewCard(data).getCardView();
-  cardsListSection.addItem(cardElement);
+  wrapper.addItem(cardElement);
   //const cardElement = createNewCard(data);
   //wrapper[method](cardElement.getCardView());
 
+  /* method still needs to be universal to adding any cards and not
+  specific to just the new places cards this can be done by:
+  keeping WRAPPER and METHOD parameter then adding necassary arguments
+  when necessary */
   //this code remains relevant to handle addCard dubmit
 }
 
@@ -161,7 +165,7 @@ function handleProfileSubmit() {
 function handleAddCardSubmit() {
   const name = addCardTitleInput.value;
   const link = addCardLinkInput.value;
-  renderCard({ name, link } /* , cardListGallery */);
+  renderCard({ name, link }, cardsListSection);
   addCardPopup.close();
   //addCardForm.reset(); //this already happens with the close() method
   addCardFormValidator.resetValidation(); //move to addCardForm submit callback
@@ -194,7 +198,7 @@ profileEditButton.addEventListener("click", () => {
   //profileTitleInput.value = profileTitle.textContent;
   //profileDescriptionInput.value = profileDescription.textContent;
   const userData = new UserInfo({ profileTitle, profileDescription });
-  //openModal(profileEditModal);
+  userData.getUserInfo();
   editProfilePopup.open();
   profileEditFormValidator.resetValidation();
 });

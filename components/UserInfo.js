@@ -2,8 +2,8 @@ export default class UserInfo {
   /* Take an object with the selectors of two elements into the
   constructor: one for the profile’s name element and one for its
   job element. */
-  constructor({ title, description }) {
-    this._profileTitle = document.querySelector(title);
+  constructor({ name, description }) {
+    this._profileTitle = document.querySelector(name);
     this._profileDescription = document.querySelector(description);
   }
 
@@ -12,7 +12,7 @@ export default class UserInfo {
 containing information about the user. This method will be handy for
 cases when it's necessary to display the user data in the open form. */
     return {
-      title: this._profileTitle.textContent,
+      name: this._profileTitle.textContent,
       description: this._profileDescription.textContent,
     };
   }
@@ -25,7 +25,7 @@ submission of the profile form.
  */
     /* takes information from inputs and sets it as the text content
 for the profile title and profile description */
-    this._profileTitle.textContent = newData.title;
+    this._profileTitle.textContent = newData.name;
     this._profileDescription.textContent = newData.description;
   }
 }
