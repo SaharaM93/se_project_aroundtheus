@@ -2,9 +2,9 @@ export default class UserInfo {
   /* Take an object with the selectors of two elements into the
   constructor: one for the profile’s name element and one for its
   job element. */
-  constructor({ name, description }) {
-    this._profileTitle = document.querySelector(name);
-    this._profileDescription = document.querySelector(description);
+  constructor({ nameSelector, descriptionSelector }) {
+    this._profileTitle = document.querySelector(nameSelector);
+    this._profileDescription = document.querySelector(descriptionSelector);
   }
 
   getUserInfo() {

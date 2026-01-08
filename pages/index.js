@@ -119,6 +119,11 @@ const editProfilePopup = new PopupWithForm(
 
 editProfilePopup.setEventListeners();
 
+const userInfo = new UserInfo({
+  nameSelector: ".profile__title-js",
+  descriptionSelector: ".profile__description-js",
+});
+
 //FUNCTIONS
 //no longer needed as the function is being established in the Popup class
 function openModal(modal) {
@@ -155,17 +160,24 @@ function renderCard(data, wrapper) {
 }
 
 //EVENT HANDLERS
-function handleProfileSubmit() {
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  closeModal(profileEditModal);
-  //change to profileEditModal.close(); ??
+function handleProfileSubmit(inputValues) {
+  //profileTitle.textContent = profileTitleInput.value;
+  //profileDescription.textContent = profileDescriptionInput.value;
+  //closeModal(profileEditModal);
+  userInfo.setUserInfo({
+    name: inputValues.name,
+    description: inputValues.description,
+  });
+  editProfilePopup.close();
 }
-
-function handleAddCardSubmit() {
-  const name = addCardTitleInput.value;
-  const link = addCardLinkInput.value;
-  renderCard({ name, link }, cardsListSection);
+//needs refactoring to accept inputValues
+function handleAddCardSubmit(inputValues) {
+  //const name = addCardTitleInput.value;
+  //const link = addCardLinkInput.value;
+  renderCard(
+    { name: inputValues.name, link: inputValues.link },
+    cardsListSection
+  );
   addCardPopup.close();
   //addCardForm.reset(); //this already happens with the close() method
   addCardFormValidator.resetValidation(); //move to addCardForm submit callback
@@ -197,12 +209,13 @@ function handleCloseModalByClickOverlay(evt) {
 profileEditButton.addEventListener("click", () => {
   //profileTitleInput.value = profileTitle.textContent;
   //profileDescriptionInput.value = profileDescription.textContent;
-  const userData = new UserInfo({ profileTitle, profileDescription });
-  userData.getUserInfo();
+  const userData = userInfo.getUserInfo();
+  profileTitleInput.value = userData.name;
+  profileDescriptionInput.value = userData.description;
   editProfilePopup.open();
   profileEditFormValidator.resetValidation();
 });
-profileEditForm.addEventListener("submit", handleProfileSubmit);
+//profileEditForm.addEventListener("submit", handleProfileSubmit);
 //addCardForm.addEventListener("submit", handleAddCardSubmit);
 addCardButton.addEventListener("click", () => {
   //openModal(addCardModal); //original
