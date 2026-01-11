@@ -3,6 +3,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js"; //new Class import
 import PopupWithForm from "../components/PopupWithForm.js"; //new Class import
 import UserInfo from "../components/UserInfo.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
 const initialCards = [
   {
@@ -112,6 +113,9 @@ const addCardPopup = new PopupWithForm(
 );
 addCardPopup.setEventListeners();
 
+const imagePreviewPopup = new PopupWithImage(".modal-image-preview-js");
+imagePreviewPopup.setEventListeners();
+
 const editProfilePopup = new PopupWithForm(
   ".modal-edit-js",
   handleProfileSubmit
@@ -184,11 +188,13 @@ function handleAddCardSubmit(inputValues) {
 }
 
 function handleImagePreview(name, link) {
-  imagePreviewModalImage.src = link;
-  imagePreviewModalImage.alt = name;
-  imagePreviewModalCaption.textContent = name;
-  openModal(imagePreviewModal);
+  imagePreviewPopup.open({ name, link });
+  //imagePreviewModalImage.src = link;
+  //imagePreviewModalImage.alt = name;
+  //imagePreviewModalCaption.textContent = name;
+  //openModal(imagePreviewModal);
 }
+
 //this function is no longer necessary, method is established in Popup class
 function handleCloseModalByEsc(evt) {
   if (evt.key === "Escape") {
