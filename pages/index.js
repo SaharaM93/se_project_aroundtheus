@@ -24,12 +24,14 @@ const profileEditFormValidator = new FormValidator(
   formValidationSettings,
   profileEditForm
 );
+
 profileEditFormValidator.enableValidation();
 
 const addCardFormValidator = new FormValidator(
   formValidationSettings,
   addCardForm
 );
+
 addCardFormValidator.enableValidation();
 
 const cardsListSection = new Section(
@@ -46,9 +48,11 @@ const addCardPopup = new PopupWithForm(
   ".modal-add-card-js",
   handleAddCardSubmit
 );
+
 addCardPopup.setEventListeners();
 
 const imagePreviewPopup = new PopupWithImage(".modal-image-preview-js");
+
 imagePreviewPopup.setEventListeners();
 
 const editProfilePopup = new PopupWithForm(
