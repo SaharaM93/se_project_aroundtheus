@@ -3,6 +3,7 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import "./index.css";
 import {
   initialCards,
   formValidationSettings,
@@ -22,14 +23,14 @@ import {
 
 const profileEditFormValidator = new FormValidator(
   formValidationSettings,
-  profileEditForm
+  profileEditForm,
 );
 
 profileEditFormValidator.enableValidation();
 
 const addCardFormValidator = new FormValidator(
   formValidationSettings,
-  addCardForm
+  addCardForm,
 );
 
 addCardFormValidator.enableValidation();
@@ -41,12 +42,12 @@ const cardsListSection = new Section(
       renderCard(cardItem, cardsListSection);
     },
   },
-  ".gallery__cards-js"
+  ".gallery__cards-js",
 );
 
 const addCardPopup = new PopupWithForm(
   ".modal-add-card-js",
-  handleAddCardSubmit
+  handleAddCardSubmit,
 );
 
 addCardPopup.setEventListeners();
@@ -57,7 +58,7 @@ imagePreviewPopup.setEventListeners();
 
 const editProfilePopup = new PopupWithForm(
   ".modal-edit-js",
-  handleProfileSubmit
+  handleProfileSubmit,
 );
 
 editProfilePopup.setEventListeners();

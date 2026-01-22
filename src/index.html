@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,15 +15,13 @@
       content="US, travel, explore, adventure, tourism, travel inspiration, travel ideas"
     />
     <meta name="author" content="Sahara McDonald" />
-    <link href="./pages/index.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="favicon.ico" />
     <title>Around the U.S.</title>
   </head>
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
         <img
-          src="./images/logo.svg"
+          src="<%=require('./images/logo.svg')%>"
           alt="white Around the U.S. logo text"
           class="header__logo"
         />
@@ -31,7 +29,7 @@
       <main class="main">
         <section class="profile page__section">
           <img
-            src="./images/jacques-cousteau.jpg"
+            src="<%=require('./images/jacques-cousteau.jpg')%>"
             alt="Portrait of Jacques Cousteau smiling while wearing a red hat and blue shirt with the ocean in the background"
             class="profile__photo"
           />
@@ -184,6 +182,5 @@
         </div>
       </li>
     </template>
-    <script src="./pages/index.js" type="module"></script>
   </body>
 </html>
